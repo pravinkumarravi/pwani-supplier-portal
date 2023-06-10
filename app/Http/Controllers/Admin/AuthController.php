@@ -22,7 +22,7 @@ class AuthController extends Controller
 
     public function handleLogin(Request $request): RedirectResponse
     {
-        $credentials = $request->safe()->only(['email', 'password']);
+        $credentials = $request->only(['email', 'password']);
 
         if (Auth::guard('admin')->attempt($credentials)) {
 

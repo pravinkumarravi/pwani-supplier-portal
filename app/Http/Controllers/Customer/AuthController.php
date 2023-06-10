@@ -30,9 +30,9 @@ class AuthController extends Controller
 
     public function handleLogin(Request $request): RedirectResponse
     {
-        $credentials = $request->safe()->only(['email', 'password']);
+        $credentials = $request->only(['email', 'password']);
 
-        if (Auth::attempt($credentials, $request->has('remember_me'))) {
+        if (Auth::attempt($credentials, $request->has('remember-me'))) {
 
             return redirect()->route('customer.dashboard');
         }
@@ -42,7 +42,7 @@ class AuthController extends Controller
 
     public function handleRegister(Request $request): RedirectResponse
     {
-        $customer = customer::create($request->safe()->all());
+        $customer = customer::create($request->all());
 
         if (!($customer instanceof Customer)) {
             return redirect()->route('customer.login');
@@ -59,7 +59,7 @@ class AuthController extends Controller
 
     public function handleResetPassword(Request $request): RedirectResponse
     {
-        return redirect()->route('customer.login')->with($request->safe()->all());
+        return redirect()->route('customer.login')->with($request->all());
     }
 
     public function logout(Request $request): RedirectResponse
