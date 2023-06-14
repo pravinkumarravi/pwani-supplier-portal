@@ -8,6 +8,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\StoreSupplierRequest;
+use App\Http\Requests\LoginSupplierRequest;
 
 use App\Models\Supplier;
 
@@ -28,34 +30,44 @@ class AuthController extends Controller
         return view('supplier.register');
     }
 
-    public function handleLogin(Request $request): RedirectResponse
+    /**
+     * Handle the login attempt for a supplier.
+     *
+     * @param  Request  $request
+     * @return RedirectResponse
+     */
+
+    public function handleLogin(LoginSupplierRequest $request): RedirectResponse
     {
-        $request->validate([
-            'email' => 'required|email|exists:suppliers,email',
-            'password' => 'required|min:8',
-        ]);
-
         $credentials = $request->only(['email', 'password']);
+        $remember = $request->filled('remember-me');
 
-        if (Auth::attempt($credentials, $request->has('remember-me'))) {
+        if (Auth::attempt($credentials, $remember)) {
             return redirect()->route('supplier.dashboard');
         }
 
-        $message = 'The provided credentials do not match our records.';
-        return redirect()->back()->withErrors(['login_error', $message]);
+        return redirect()->back()
+            ->withErrors(['login_error' => 'The provided credentials do not match our records.'])
+            ->withInput($request->except('password'));
     }
 
-    public function handleRegister(Request $request): RedirectResponse
+    /**
+     * Handle the registration of a new supplier.
+     *
+     * @param  StoreSupplierRequest  $request
+     * @return RedirectResponse
+     */
+    public function handleRegister(StoreSupplierRequest $request): RedirectResponse
     {
-        $supplier = Supplier::create($request->all());
+        $validatedData = $request->validated();
 
-        if (!($supplier instanceof Supplier)) {
-            return redirect()->route('supplier.login');
-        }
+        $supplier = Supplier::create($validatedData);
 
-        event(new  Registered($supplier));
+        event(new Registered($supplier));
+
         return redirect()->route('supplier.welcome');
     }
+
 
     public function resetPassword(Request $request): View
     {
