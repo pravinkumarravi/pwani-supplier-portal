@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Customer;
+use App\Models\supplier;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -18,7 +18,7 @@ class Registered
     /**
      * Create a new event instance.
      */
-    public function __construct(public Customer $customer)
+    public function __construct(public Supplier $customer)
     {
         //
     }

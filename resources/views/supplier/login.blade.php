@@ -1,4 +1,3 @@
-<!-- home.blade.php -->
 @extends('layouts\default')
 
 @section('content')
@@ -17,24 +16,31 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="m-sm-3">
-                            <form method="POST" accept="{{ route('customer.login') }}">
+                            <form method="POST" accept="{{ route('supplier.login') }}">
                                 @csrf
                                 <div class="mb-3">
-                                    <label class="form-label">Email</label>
-                                    <input class="form-control form-control-lg" type="email" name="email"
-                                        placeholder="Enter your email" />
+                                    <label class="form-label">Supplier Numbar or Email</label>
+                                    <input
+                                        class="form-control form-control-lg {{ $errors->has('email') || $errors->has('login_error') ? 'is-invalid' : '' }}"
+                                        type="email" name="email" placeholder="Supplier Number or Email"
+                                        value="{{ old('email') }}" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Password</label>
-                                    <input class="form-control form-control-lg" type="password" name="password"
-                                        placeholder="Enter your password" />
+                                    <input
+                                        class="form-control form-control-lg {{ $errors->has('password') || $errors->has('login_error') ? 'is-invalid' : '' }}"
+                                        type="password" name="password" placeholder="Enter your password" />
                                 </div>
-                                <div>
+                                <div class="d-flex justify-content-between">
                                     <div class="form-check align-items-center">
                                         <input id="customControlInline" type="checkbox" class="form-check-input"
                                             value="remember-me" name="remember-me" checked>
                                         <label class="form-check-label text-small" for="customControlInline">Remember
                                             me</label>
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('supplier.forgot-password') }}"
+                                            rel="noopener noreferrer">Forgot Password?</a>
                                     </div>
                                 </div>
                                 <div class="d-grid gap-2 mt-3">
@@ -45,7 +51,7 @@
                     </div>
                 </div>
                 <div class="text-center mb-3">
-                    Don't have an account? <a href="pages-sign-up.html">Sign up</a>
+                    Don't have an account? <a href="{{ route('supplier.register') }}">Sign up</a>
                 </div>
             </div>
         </div>

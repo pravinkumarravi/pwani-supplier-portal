@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'customer',
+        'guard' => 'supplier',
         'passwords' => 'users',
     ],
 
@@ -36,9 +36,9 @@ return [
     */
 
     'guards' => [
-        'customer' => [
+        'supplier' => [
             'driver' => 'session',
-            'provider' => 'customer',
+            'provider' => 'supplier',
         ],
         'admin' => [
             'driver' => 'session',
@@ -64,9 +64,9 @@ return [
     */
 
     'providers' => [
-        'customer' => [
+        'supplier' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Customer::class,
+            'model' => App\Models\Supplier::class,
         ],
 
         'admin' => [
@@ -95,8 +95,8 @@ return [
     */
 
     'passwords' => [
-        'customer' => [
-            'provider' => 'customer',
+        'supplier' => [
+            'provider' => 'supplier',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
