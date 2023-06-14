@@ -26,7 +26,7 @@ class StoreSupplierRequest extends FormRequest
             'name' => 'nullable|string|max:50',
             'phone_number' => 'nullable|regex:/^[0-9]{7,15}$/',
             'phone_code' => 'nullable|string|max:4',
-            'password' => 'required',
+            'password' => 'required|min:6|max:15',
         ];
     }
 }
