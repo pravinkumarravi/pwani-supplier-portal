@@ -54,6 +54,7 @@ Route::middleware('guest:supplier')->group(function () {
     Route::post('/login', [SupplierAuthController::class, 'handleLogin']);
     Route::get('/register', [SupplierAuthController::class, 'register'])->name('supplier.register');
     Route::post('/register', [SupplierAuthController::class, 'handleRegister']);
+    Route::view('/register/success', 'supplier.welcome')->name('supplier.welcome');
     Route::get('/forgot-password', [SupplierAuthController::class, 'forgotPassword'])->name('supplier.forgot-password');
     Route::post('/forgot-password', [SupplierAuthController::class, 'handleForgotPassword']);
 });
