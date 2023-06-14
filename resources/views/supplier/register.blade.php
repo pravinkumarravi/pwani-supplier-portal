@@ -31,11 +31,11 @@
                                 <label class="form-label">Mobile</label>
                                 <div class="row">
                                     <div class="col-md-3 pe-0">
-                                        <input class="form-control form-control-lg" type="code" name="code"
+                                        <input class="form-control form-control-lg" type="code" name="phone_code"
                                             placeholder="+91" />
                                     </div>
                                     <div class="col-md-9">
-                                        <input class="form-control form-control-lg" type="phone" name="phone"
+                                        <input class="form-control form-control-lg" type="phone" name="phone_number"
                                             placeholder="Enter your phone number" />
                                     </div>
                                 </div>
