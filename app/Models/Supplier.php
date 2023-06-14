@@ -34,7 +34,7 @@ class Supplier extends Authenticatable implements MustVerifyEmail
      * @param  string $password
      * @return void
      */
-    public function setPassword(string $password): void
+    public function setPasswordAttribute(string $password): void
     {
         $this->attributes['password'] = Hash::make($password);
     }
