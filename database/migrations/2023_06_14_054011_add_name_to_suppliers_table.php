@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('suppliers', function (Blueprint $table) {
             $table->string('name', 50)->after('number');
+            $table->string('phone_code', 4)->after('email');
         });
     }
 
@@ -23,6 +24,7 @@ return new class extends Migration
     {
         Schema::table('suppliers', function (Blueprint $table) {
             $table->dropColumn('name');
+            $table->dropColumn('phone_code');
         });
     }
 };
