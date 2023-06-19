@@ -23,9 +23,9 @@ class StoreSupplierRequest extends FormRequest
     {
         return [
             'email' => 'required|email|unique:suppliers,email',
-            'name' => 'nullable|string|max:50',
-            'phone_number' => 'nullable|regex:/^[0-9]{7,15}$/',
-            'phone_code' => 'nullable|string|max:4',
+            'name' => 'required|string|max:50',
+            'phone_number' => 'required|regex:/^[0-9]{7,15}$/',
+            'phone_code' => 'required|string|max:4',
             'password' => 'required|min:6|max:15',
             'terms-and-policy' => 'accepted',
         ];
