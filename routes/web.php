@@ -54,9 +54,9 @@ Route::middleware('guest:supplier')->group(function () {
     Route::post('/login', [SupplierAuthController::class, 'handleLogin']);
     Route::get('/register', [SupplierAuthController::class, 'register'])->name('supplier.register');
     Route::post('/register', [SupplierAuthController::class, 'handleRegister']);
-    Route::view('/register/success', 'supplier.welcome')->name('supplier.welcome');
-    Route::get('/forgot-password', [SupplierAuthController::class, 'forgotPassword'])->name('supplier.forgot-password');
-    Route::post('/forgot-password', [SupplierAuthController::class, 'handleForgotPassword']);
+    //Route::view('/register/success', 'supplier.welcome')->name('supplier.welcome');
+    Route::get('/forgot-password', [SupplierAuthController::class, 'resetPassword'])->name('supplier.reset-password');
+    Route::post('/forgot-password', [SupplierAuthController::class, 'handleResetPassword']);
 });
 
 // Admin routes
@@ -73,7 +73,9 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-
+/**
+ * Static page routes
+ */
 Route::view('/terms',  'terms')->name('terms');
 Route::view('/support',  'support')->name('support');
 Route::view('/privacy',  'privacy')->name('privacy');

@@ -15,11 +15,6 @@ use App\Models\Supplier;
 
 class AuthController extends Controller
 {
-    public function index(Request $request): View
-    {
-        return view('supplier.dashboard');
-    }
-
     public function login(Request $request): View
     {
         return view('supplier.login');
@@ -28,6 +23,11 @@ class AuthController extends Controller
     public function register(Request $request): View
     {
         return view('supplier.register');
+    }
+
+    public function resetPassword(Request $request): View
+    {
+        return view('supplier.reset-password');
     }
 
     /**
@@ -68,15 +68,29 @@ class AuthController extends Controller
         return redirect()->route('supplier.welcome');
     }
 
-
-    public function resetPassword(Request $request): View
-    {
-        return view('supplier.reset-password');
-    }
-
+    /**
+     * Handle the resend verification email request.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function handleResetPassword(Request $request): RedirectResponse
     {
-        return redirect()->route('supplier.login')->with($request->all());
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $email = $request->input('email');
+
+        $supplier = Supplier::where('email', $email)->first();
+
+        if (!$supplier) {
+            return redirect()->back()->with('error', 'There is no supplier associated with this email address.');
+        }
+
+        event(new Registered($supplier));
+
+        return redirect()->back()->with('success', 'A verification email has been resent to your email address. Please check your inbox.');
     }
 
     public function logout(Request $request): RedirectResponse
@@ -84,15 +98,5 @@ class AuthController extends Controller
         Auth::guard('supplier')->logout();
 
         return redirect()->route('supplier.login');
-    }
-
-    public function forgotPassword(Request $request): View
-    {
-        return view('supplier.forgot-password');
-    }
-
-    public function handleForgotPassword(Request $request): View
-    {
-        return view('supplier.password-reset-email-sent');
     }
 }

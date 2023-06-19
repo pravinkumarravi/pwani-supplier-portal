@@ -39,7 +39,7 @@
                                             me</label>
                                     </div>
                                     <div>
-                                        <a href="{{ route('supplier.forgot-password') }}"
+                                        <a href="{{ route('supplier.reset-password') }}"
                                             rel="noopener noreferrer">Forgot Password?</a>
                                     </div>
                                 </div>

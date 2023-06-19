@@ -24,7 +24,7 @@
                                 </p>
                                 <p class="text-center">
                                     If you didn't receive the email, please check your spam folder or
-                                    <a href="{{ route('supplier.forgot-password') }}">
+                                    <a href="{{ route('supplier.reset-password') }}">
                                         click here to request another password reset email
                                     </a>.
                                 </p>
