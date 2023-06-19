@@ -19,31 +19,39 @@
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label">Supplier Name</label>
-                                <input class="form-control form-control-lg" type="text" name="name"
-                                    placeholder="Enter your name" />
+                                <input
+                                    class="form-control form-control-lg {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                    type="text" name="name" placeholder="Enter your name" value="{{ old('name') }}" />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
-                                <input class="form-control form-control-lg" type="email" name="email"
-                                    placeholder="Enter your email" />
+                                <input
+                                    class="form-control form-control-lg {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                                    type="email" name="email" placeholder="Enter your email"
+                                    value="{{ old('email') }}" />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Mobile</label>
                                 <div class="row">
                                     <div class="col-md-3 pe-0">
-                                        <input class="form-control form-control-lg" type="code" name="phone_code"
-                                            placeholder="+91" />
+                                        <input
+                                            class="form-control form-control-lg {{ $errors->has('phone_code') ? 'is-invalid' : '' }}"
+                                            type="code" name="phone_code" placeholder="+91"
+                                            value="{{ old('phone_code') }}" />
                                     </div>
                                     <div class="col-md-9">
-                                        <input class="form-control form-control-lg" type="phone" name="phone_number"
-                                            placeholder="Enter your phone number" />
+                                        <input
+                                            class="form-control form-control-lg {{ $errors->has('phone_number') ? 'is-invalid' : '' }}"
+                                            type="phone" name="phone_number" placeholder="Enter your phone number"
+                                            value="{{ old('phone_number') }}" />
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
-                                <input class="form-control form-control-lg" type="password" name="password"
-                                    placeholder="Enter password" />
+                                <input
+                                    class="form-control form-control-lg {{ $errors->has('password') ? 'is-invalid' : '' }}"
+                                    type="password" name="password" placeholder="Enter password" />
                             </div>
                             <div>
                                 <div class="form-check align-items-center">
